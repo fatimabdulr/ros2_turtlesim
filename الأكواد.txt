@@ -1,0 +1,25 @@
+# =========================================================
+# Section 1: Launch Turtlesim Simulator
+# =========================================================
+source /opt/ros/humble/setup.bash
+ros2 run turtlesim turtlesim_node 
+
+# =========================================================
+# Section 2: Move the Turtle in a circular path
+# =========================================================
+ros2 topic pub -r 10 /turtle1/cmd_vel geometry_msgs/Twist "{linear: {x: 2.0}, angular: {z: 1.0}}" &
+sleep 5
+kill $!
+
+# =========================================================
+# Section 3: Change Turtlesim background color to pink
+# =========================================================
+ros2 param set /turtlesim background_r 200
+ros2 param set /turtlesim background_g 100
+ros2 param set /turtlesim background_b 150
+
+# =========================================================
+# Section 4: Clear all turtle paths
+# =========================================================
+ros2 service call /clear std_srvs/srv/Empty "{}"
+
